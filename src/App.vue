@@ -1,5 +1,5 @@
 <template >
-  <div class="playground" @click="addClick">
+  <div class="playground" @click="addClick" v-if="!gameEnd">
     <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints" @endGame="endGame"></TopScoreBoard>
     <Balloon v-for="balloon in balloons" :key="balloon.id"
              :balloon="balloon" @pop="removeBalloon"
