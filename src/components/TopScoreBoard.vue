@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
 .top-timer{
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
   max-width: 400px;
   width: 100%;
   display: flex;

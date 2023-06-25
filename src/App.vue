@@ -37,7 +37,7 @@ export default {
       this.clicks += 1
     },
     generateNewBalloon(){
-      let newX = Math.random()*(this.maxWidth/2-50)+50
+      let newX = Math.random()*((this.maxWidth-300)-(this.maxWidth/2-300))+(this.maxWidth/2-300)
       let newY = Math.random()*(500-50)+50
       this.lastId += 1
       let balloon = {
@@ -90,6 +90,8 @@ body{
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
+  padding: 0;
+  margin: 0;
   cursor: crosshair;
   -webkit-user-select: none;
   -ms-user-select: none;
