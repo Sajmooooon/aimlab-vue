@@ -26,7 +26,10 @@ export default {
   methods: {
     removeBalloon(id){
       this.balloons = this.balloons.filter(balloon=> balloon.id !== id)
-    }
+      fetch("http://localhost:3000/balloons/"+id,{
+        method: "DELETE"}).then(() => this.$emit('delete',id))
+          .catch(err => console.log(err.message))
+    },
   },
   beforeMount() {
     const body = document.querySelector('body');
