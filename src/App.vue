@@ -91,6 +91,9 @@ body{
   background-attachment: fixed;
   height: 100vh;
   cursor: crosshair;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
 }
 .playground{

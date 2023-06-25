@@ -1,5 +1,5 @@
 <template>
-  <img src="../assets/balloon.png" alt="balloon" class="balloon" ref="balloon" @click="popBalloon">
+  <img src="../assets/balloon.png" alt="balloon" class="balloon" ref="balloon" @click="popBalloon" draggable="false">
 </template>
 
 <script>
