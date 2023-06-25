@@ -29,11 +29,10 @@
 <script>
 export default {
   name: "TopScoreBoard",
+  props: ["accuracy","points"],
   data(){
     return {
-      points: 0,
       timer: 30,
-      accuracy: 100,
       startTimer: true
     }
   },

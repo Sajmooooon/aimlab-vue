@@ -1,6 +1,6 @@
-<template>
-  <div class="playground">
-    <TopScoreBoard></TopScoreBoard>
+<template >
+  <div class="playground" @click="addClick">
+    <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints"></TopScoreBoard>
     <Balloon v-for="balloon in balloons" :key="balloon.id"
              :balloon="balloon" @pop="removeBalloon"
     ></Balloon>
@@ -22,17 +22,22 @@ export default {
       maxHeight: 0,
       balloons: [],
       lastId: 0,
-      numBalloons: 4
+      numBalloons: 4,
+      hits: 0,
+      clicks: 0,
     }
   },
   methods: {
     removeBalloon(id){
       this.balloons = this.balloons.filter(balloon=> balloon.id !== id)
       this.generateNewBalloon()
-
+      this.hits += 1
+    },
+    addClick(){
+      this.clicks += 1
     },
     generateNewBalloon(){
-      let newX = Math.random()*(500-50)+50
+      let newX = Math.random()*(this.maxWidth/2-50)+50
       let newY = Math.random()*(500-50)+50
       this.lastId += 1
       let balloon = {
@@ -41,7 +46,21 @@ export default {
         y: newY
       }
       this.balloons.push(balloon)
-      console.log(this.balloons)
+
+    }
+  },
+  computed: {
+    calcAccuracy(){
+      if(this.clicks===0){
+        return 100
+      }
+      let acc = this.hits * 100 / this.clicks
+      return acc.toFixed(2)
+    },
+    calcPoints(){
+      let positivePoints = this.hits * 10
+      let negativePoints = (this.clicks-this.hits) * 5
+      return positivePoints - negativePoints
     }
   },
   beforeMount() {
@@ -77,5 +96,6 @@ body{
 .playground{
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 </style>
