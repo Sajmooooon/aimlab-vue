@@ -1,15 +1,20 @@
 <template>
-  <Balloon v-for="balloon in balloons" :key="balloon.id"
-           :x="balloon.x" :y="balloon.y"
-  ></Balloon>
+  <div class="playground">
+    <TopScoreBoard></TopScoreBoard>
+    <Balloon v-for="balloon in balloons" :key="balloon.id"
+             :balloon="balloon" @pop="removeBalloon"
+    ></Balloon>
+  </div>
+
 </template>
 
 <script>
 import Balloon from "@/components/Balloon";
+import TopScoreBoard from "@/components/TopScoreBoard";
 export default {
   name: 'App',
   components: {
-    Balloon
+    Balloon, TopScoreBoard
   },
   data(){
     return{
@@ -21,6 +26,11 @@ export default {
         {id: 2, x: 150, y: 50},
         {id: 3, x: 300, y: 400},
       ],
+    }
+  },
+  methods: {
+    removeBalloon(id){
+      this.balloons = this.balloons.filter(balloon=> balloon.id !== id)
     }
   },
   beforeMount() {
@@ -45,5 +55,9 @@ body{
   height: 100vh;
   cursor: crosshair;
 
+}
+.playground{
+  display: flex;
+  flex-direction: column;
 }
 </style>
