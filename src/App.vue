@@ -1,6 +1,6 @@
 <template >
   <div class="playground" @click="addClick">
-    <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints"></TopScoreBoard>
+    <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints" @endGame="endGame"></TopScoreBoard>
     <Balloon v-for="balloon in balloons" :key="balloon.id"
              :balloon="balloon" @pop="removeBalloon"
     ></Balloon>
@@ -22,9 +22,10 @@ export default {
       maxHeight: 0,
       balloons: [],
       lastId: 0,
-      numBalloons: 4,
+      numBalloons: 5,
       hits: 0,
       clicks: 0,
+      gameEnd: false
     }
   },
   methods: {
@@ -32,6 +33,13 @@ export default {
       this.balloons = this.balloons.filter(balloon=> balloon.id !== id)
       this.generateNewBalloon()
       this.hits += 1
+    },
+    removeAllBalloons(){
+      this.balloons = []
+    },
+    endGame(){
+      this.removeAllBalloons()
+      this.gameEnd = true
     },
     addClick(){
       this.clicks += 1

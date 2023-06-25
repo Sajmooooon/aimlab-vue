@@ -46,6 +46,7 @@ export default {
       }
       else{
         this.startTimer = false
+        this.$emit("endGame")
         this.timer = 30
       }
     }
