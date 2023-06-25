@@ -20,16 +20,29 @@ export default {
     return{
       maxWidth: 0,
       maxHeight: 0,
-      balloons: []
+      balloons: [],
+      lastId: 0,
+      numBalloons: 4
     }
   },
   methods: {
     removeBalloon(id){
       this.balloons = this.balloons.filter(balloon=> balloon.id !== id)
-      fetch("http://localhost:3000/balloons/"+id,{
-        method: "DELETE"}).then(() => this.$emit('delete',id))
-          .catch(err => console.log(err.message))
+      this.generateNewBalloon()
+
     },
+    generateNewBalloon(){
+      let newX = Math.random()*(500-50)+50
+      let newY = Math.random()*(500-50)+50
+      this.lastId += 1
+      let balloon = {
+        id: this.lastId,
+        x: newX,
+        y: newY
+      }
+      this.balloons.push(balloon)
+      console.log(this.balloons)
+    }
   },
   beforeMount() {
     const body = document.querySelector('body');
@@ -39,11 +52,13 @@ export default {
 
     this.maxHeight = bodyHeight
     this.maxWidth = bodyWidth
+
+
   },
   mounted() {
-    fetch("http://localhost:3000/balloons")
-        .then(data=>data.json())
-        .then(balloons=>this.balloons=balloons)
+    for(let i = 0; i<this.numBalloons; i++){
+      this.generateNewBalloon()
+    }
   }
 }
 </script>
