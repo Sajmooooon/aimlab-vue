@@ -1,15 +1,20 @@
 <template>
-  <img src="../assets/balloon.png" alt="balloon" class="balloon" ref="balloon">
+  <img src="../assets/balloon.png" alt="balloon" class="balloon" ref="balloon" @click="popBalloon">
 </template>
 
 <script>
 export default {
   name: "Balloon",
-  props: ['x','y'],
+  props: ['balloon'],
   mounted() {
     const img = this.$refs.balloon
-    img.style.left = this.x + 'px';
-    img.style.top = this.y + 'px'
+    img.style.left = this.balloon.x + 'px';
+    img.style.top = this.balloon.y + 'px'
+  },
+  methods: {
+    popBalloon(){
+      this.$emit('pop', this.balloon.id)
+    }
   }
 }
 </script>
