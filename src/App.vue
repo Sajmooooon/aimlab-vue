@@ -37,8 +37,14 @@ export default {
       this.clicks += 1
     },
     generateNewBalloon(){
-      let newX = Math.random()*((this.maxWidth-300)-(this.maxWidth/2-300))+(this.maxWidth/2-300)
-      let newY = Math.random()*(500-50)+50
+      let generateDistance = true
+      let newX = 0
+      let newY = 0
+      while(generateDistance){
+        newX = Math.random()*((this.maxWidth-300)-(this.maxWidth/2-300))+(this.maxWidth/2-300)
+        newY = Math.random()*(500-50)+50
+        generateDistance = this.checkDistance(newX, newY)
+      }
       this.lastId += 1
       let balloon = {
         id: this.lastId,
@@ -46,7 +52,21 @@ export default {
         y: newY
       }
       this.balloons.push(balloon)
-
+    },
+    checkDistance(x,y){
+      for(let ball of this.balloons){
+          let distance = this.distanceBetweenPoints(x,ball.x, y, ball.y)
+          if(distance<150){
+            return true
+          }
+      }
+      return false
+    },
+    distanceBetweenPoints(x1,x2,y1,y2){
+      let a = x1 - x2;
+      let b = y1 - y2;
+      let c = Math.sqrt( a*a + b*b );
+      return c
     }
   },
   computed: {
