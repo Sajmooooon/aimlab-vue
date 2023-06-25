@@ -20,12 +20,7 @@ export default {
     return{
       maxWidth: 0,
       maxHeight: 0,
-      balloons: [
-        {id: 0, x: 0, y: 0},
-        {id: 1, x: 50, y: 150},
-        {id: 2, x: 150, y: 50},
-        {id: 3, x: 300, y: 400},
-      ],
+      balloons: []
     }
   },
   methods: {
@@ -41,6 +36,11 @@ export default {
 
     this.maxHeight = bodyHeight
     this.maxWidth = bodyWidth
+  },
+  mounted() {
+    fetch("http://localhost:3000/balloons")
+        .then(data=>data.json())
+        .then(balloons=>this.balloons=balloons)
   }
 }
 </script>
