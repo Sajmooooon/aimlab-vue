@@ -2,6 +2,13 @@
   <div class="backdrop" @click.self="closeModal">
     <div class="modal">
       <img v-if="firstGame" class="game-preview" src="../assets/preview.jpg">
+      <div v-else class="last-game-details">
+        <div class="game-details">
+          <h1 class="game-title">Last Game:</h1>
+          <h2 class="game-mode">Score: <span class="score">{{points}} </span></h2>
+          <h2 class="game-mode">Accuracy: <span class="score">{{accuracy}} %</span></h2>
+        </div>
+      </div>
       <div class="game-details">
         <h2 class="game-title">Gridshot</h2>
         <h3 class="game-mode">Mode: Ultimate</h3>
@@ -11,7 +18,8 @@
         <input type="number" @change="checkNumber('time')" v-model="time">
       </div>
       <button class="start-game" @click="startGame">
-        Play Now
+
+        {{playGameText}}
       </button>
     </div>
   </div>
@@ -20,6 +28,7 @@
 <script>
 export default {
   name: "Modal",
+  props: ["accuracy","points"],
   data(){
     return{
       time: 60,
@@ -42,6 +51,16 @@ export default {
         if(this.time<10 || this.time>60){
           this.time = 30
         }
+      }
+    }
+  },
+  computed: {
+    playGameText(){
+      if(this.firstGame){
+        return "Play Game"
+      }
+      else{
+        return "Play Again"
       }
     }
   }
@@ -136,5 +155,13 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.last-game-details{
+  border-bottom: 3px solid #54649c;
+}
+
+.score{
+  color: #42b983;
 }
 </style>

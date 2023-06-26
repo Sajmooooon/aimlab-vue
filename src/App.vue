@@ -1,5 +1,5 @@
 <template >
-  <Modal @startGame="startGame" v-show="gameEnd"></Modal>
+  <Modal @startGame="startGame" :accuracy="calcAccuracy" :points="calcPoints" v-show="gameEnd"></Modal>
   <div class="playground" @click="addClick" v-if="!gameEnd">
     <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints" :time="timer" @endGame="endGame"></TopScoreBoard>
     <Balloon v-for="balloon in balloons" :key="balloon.id"
