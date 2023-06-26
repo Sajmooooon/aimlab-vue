@@ -1,4 +1,5 @@
 <template >
+  <Modal @startGame="startGame" v-show="gameEnd"></Modal>
   <div class="playground" @click="addClick" v-if="!gameEnd">
     <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints" @endGame="endGame"></TopScoreBoard>
     <Balloon v-for="balloon in balloons" :key="balloon.id"
@@ -11,9 +12,11 @@
 <script>
 import Balloon from "@/components/Balloon";
 import TopScoreBoard from "@/components/TopScoreBoard";
+import Modal from "@/components/Modal";
 export default {
   name: 'App',
   components: {
+    Modal,
     Balloon, TopScoreBoard
   },
   data(){
@@ -25,7 +28,7 @@ export default {
       numBalloons: 5,
       hits: 0,
       clicks: 0,
-      gameEnd: false
+      gameEnd: true
     }
   },
   methods: {
@@ -75,6 +78,16 @@ export default {
       let b = y1 - y2;
       let c = Math.sqrt( a*a + b*b );
       return c
+    },
+    startGame(data){
+      this.numBalloons = data.balloons
+
+      this.gameEnd = false
+      this.hits = 0
+      this.clicks = 0
+      for(let i = 0; i<this.numBalloons; i++){
+        this.generateNewBalloon()
+      }
     }
   },
   computed: {
@@ -101,11 +114,6 @@ export default {
     this.maxWidth = bodyWidth
 
 
-  },
-  mounted() {
-    for(let i = 0; i<this.numBalloons; i++){
-      this.generateNewBalloon()
-    }
   }
 }
 </script>
@@ -120,13 +128,13 @@ body{
   height: 100vh;
   padding: 0;
   margin: 0;
-  cursor: crosshair;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
 
 }
 .playground{
+  cursor: crosshair;
   display: flex;
   flex-direction: column;
   height: 100vh;
