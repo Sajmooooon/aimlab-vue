@@ -52,9 +52,11 @@ export default {
       let generateDistance = true
       let newX = 0
       let newY = 0
+      const widthRange = this.maxWidth * 0.5;
+      const heightRange = this.maxHeight * 0.5;
       while(generateDistance){
-        newX = Math.random()*((this.maxWidth-300)-(this.maxWidth/2-300))+(this.maxWidth/2-300)
-        newY = Math.random()*(500-50)+50
+        newX = (Math.random() * widthRange) + (this.maxWidth * 0.25);
+        newY = (Math.random() * heightRange) + (this.maxHeight * 0.25);
         generateDistance = this.checkDistance(newX, newY)
       }
       this.lastId += 1
