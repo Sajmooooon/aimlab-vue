@@ -1,7 +1,7 @@
 <template >
   <Modal @startGame="startGame" v-show="gameEnd"></Modal>
   <div class="playground" @click="addClick" v-if="!gameEnd">
-    <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints" @endGame="endGame"></TopScoreBoard>
+    <TopScoreBoard :accuracy="calcAccuracy" :points="calcPoints" :time="timer" @endGame="endGame"></TopScoreBoard>
     <Balloon v-for="balloon in balloons" :key="balloon.id"
              :balloon="balloon" @pop="removeBalloon"
     ></Balloon>
@@ -26,6 +26,7 @@ export default {
       balloons: [],
       lastId: 0,
       numBalloons: 5,
+      timer: 30,
       hits: 0,
       clicks: 0,
       gameEnd: true
@@ -81,7 +82,7 @@ export default {
     },
     startGame(data){
       this.numBalloons = data.balloons
-
+      this.timer = data.time
       this.gameEnd = false
       this.hits = 0
       this.clicks = 0

@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="item time">
-    <h1>{{timer}}</h1>
+    <h1>0:{{timer}}</h1>
   </div>
   <div class="item">
     <div class="stats">
@@ -29,11 +29,12 @@
 <script>
 export default {
   name: "TopScoreBoard",
-  props: ["accuracy","points"],
+  props: ["accuracy","points","time"],
   data(){
     return {
       timer: 30,
-      startTimer: true
+      startTimer: true,
+
     }
   },
   methods: {
@@ -51,10 +52,8 @@ export default {
       }
     }
   },
-  computed: {
-
-  },
   created() {
+    this.timer = this.time
     this.countDown()
   }
 }
