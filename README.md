@@ -1,4 +1,7 @@
-# aimlab-vue
+# Aimlab Vue
+
+## Description
+Simple game like Aimlab. The goal of the game is to burst as many balloons as possible as quickly as possible
 
 ## Project setup
 ```
@@ -15,5 +18,8 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Visual Demo
+<p>
+    <img alt="" src="https://i.imgur.com/lXRVGsq.jpg" width="800"/>
+    <img src="https://i.imgur.com/S5jhjC8.jpg" width="800" />
+</p>
